@@ -1,0 +1,52 @@
+##########################################################################################
+## This file is edited by Ghufron WK (Ghuflabs)                                         ##
+## https://ghuflabs.github.io                                                           ##
+##########################################################################################                                                                                  ##
+
+
+# Menu options
+menu.pinout=Pinout
+
+
+#####################
+#### ATmega128/A ####
+#####################
+
+128.name=Ghufino Mega128
+128.upload.tool=avrdude
+128.upload.protocol=arduino
+128.upload.maximum_size=130048
+128.upload.maximum_data_size=4096
+
+128.bootloader.tool=avrdude
+128.bootloader.unlock_bits=0x3f
+128.bootloader.lock_bits=0x0f
+128.bootloader.low_fuses=0b{bootloader.bod_bits}{bootloader.sut_cksel_bits}
+
+128.build.core=MCUdude_corefiles
+128.build.variant=64-pin-avr
+128.build.mcu=Ghufino Mega128
+128.build.board=AVR_Ghufino Mega128
+
+# Brown out detection - This is the first part of the low fuse bit concatenation
+128.menu.BOD.2v7=2.7v
+128.menu.BOD.2v7.bootloader.bod_bits=10
+
+# Compiler link time optimization
+128.menu.LTO.Os_flto=Enabled
+128.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto
+128.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto
+128.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto
+128.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
+
+# Clock frequencies
+128.menu.clock.16MHz_external=16 MHz external
+128.menu.clock.16MHz_external.upload.port=UART0
+128.menu.clock.16MHz_external.upload.speed=115200
+128.menu.clock.16MHz_external.bootloader.sut_cksel_bits=111111
+128.menu.clock.16MHz_external.bootloader.high_fuses=0xc6
+128.menu.clock.16MHz_external.bootloader.extended_fuses=0xff
+128.menu.clock.16MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}.hex
+128.menu.clock.16MHz_external.build.f_cpu=16000000L
+
+
